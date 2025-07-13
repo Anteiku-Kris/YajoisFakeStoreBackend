@@ -1,0 +1,40 @@
+{
+  "name": "yajoisfakestorebackend",
+  "version": "1.0.0",
+  "description": "Proyecto backend para YajoisFakeStore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anteiku-Kris/YajoisFakeStoreBackend.git"
+  },
+  "keywords": [
+    "backend",
+    "yajois",
+    "ts",
+    "js",
+    "typescript",
+    "javascript",
+    "fake"
+  ],
+  "author": "Kristopher Enrique Castillo Gómez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anteiku-Kris/YajoisFakeStoreBackend/issues"
+  },
+  "homepage": "https://github.com/Anteiku-Kris/YajoisFakeStoreBackend#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.50.5",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.13",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
