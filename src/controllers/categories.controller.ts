@@ -29,7 +29,7 @@ export const getProductsByCategory = async (req: Request, res: Response) => {
     .eq("category_id", id);
 
   if (error) {
-    return res.status(500).json({ error: error.message });
+    throw new Error(error.message);
   }
   res.json(data);
 };
