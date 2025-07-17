@@ -1,9 +1,9 @@
-import {Router} from "express";
-
-import { getAllProducts } from "../controllers/products.controller";
+import {Router} from 'express';
+import { getAllProducts } from '../controllers/products.controller';
 
 const router = Router();
 
-router.get("/", getAllProducts);
+//GET /api/products - Lista todos los productos
+router.get('/', getAllProducts);
 
 export default router;
