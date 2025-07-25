@@ -194,41 +194,69 @@ export const deleteProductImage = async (req: Request, res: Response) => {
 
   // 1. Buscar la imagen en la tabla
   const { data: image, error: fetchError } = await supabase
-    .from('product_images')
-    .select('image_url')
-    .eq('id', id)
+    .from("product_images")
+    .select("image_url")
+    .eq("id", id)
     .single();
 
   if (fetchError || !image) {
-    return res.status(404).json({ message: 'Imagen no encontrada' });
+    return res.status(404).json({ message: "Imagen no encontrada" });
   }
 
   // 2. Extraer path del archivo desde la URL pública
-  const pathParts = image.image_url.split('/product-images/');
+  const pathParts = image.image_url.split("/product-images/");
   const filePath = pathParts[1];
 
   if (!filePath) {
-    return res.status(400).json({ message: 'No se pudo identificar la ruta del archivo en Storage' });
+    return res
+      .status(400)
+      .json({
+        message: "No se pudo identificar la ruta del archivo en Storage",
+      });
   }
 
   // 3. Eliminar de Supabase Storage
   const { error: storageError } = await supabase.storage
-    .from('product-images')
+    .from("product-images")
     .remove([filePath]);
 
   if (storageError) {
-    return res.status(500).json({ message: 'Error al eliminar la imagen del Storage', error: storageError.message });
+    return res
+      .status(500)
+      .json({
+        message: "Error al eliminar la imagen del Storage",
+        error: storageError.message,
+      });
   }
 
   // 4. Eliminar registro en la tabla
   const { error: deleteError } = await supabase
-    .from('product_images')
+    .from("product_images")
     .delete()
-    .eq('id', id);
+    .eq("id", id);
 
   if (deleteError) {
-    return res.status(500).json({ message: 'Error al eliminar registro de la imagen', error: deleteError.message });
+    return res
+      .status(500)
+      .json({
+        message: "Error al eliminar registro de la imagen",
+        error: deleteError.message,
+      });
   }
 
-  res.json({ message: 'Imagen eliminada exitosamente', id });
+  res.json({ message: "Imagen eliminada exitosamente", id });
+};
+
+export const getAllUsers = async (_req: Request, res: Response) => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("id, name, role, created_at");
+
+  if (error) {
+    return res
+      .status(500)
+      .json({ message: "Error al obtener usuarios", error: error.message });
+  }
+
+  res.json({ users: data });
 };

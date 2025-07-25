@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { authenticate } from "../middlewares/authMiddleware";
 import { authorizeAdmin } from "../middlewares/authorizeAdmin";
-import { createProduct, updateProduct, uploadProductImage, deleteProductImage } from "../controllers/admin.controller";
+import { createProduct, updateProduct, uploadProductImage, deleteProductImage, getAllUsers } from "../controllers/admin.controller";
 import { upload } from "../middlewares/uploadMiddleware";
 
 
@@ -33,5 +33,14 @@ router.post(
 router.delete(
   "/product-images/:id", authenticate, authorizeAdmin, deleteProductImage
 );
+
+
+router.get(
+  "/users",
+  authenticate,
+  authorizeAdmin,
+  getAllUsers
+);
+
 
 export default router;
